@@ -1,29 +1,13 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
   return (
-    <nav className="flex justify-between items-center bg-white lg:px-12 px-3 py-2 w-full z-10">
-      <Link to="/">
-        <div className="flex items-center">
-          <img
-            className="md:w-24 h-16 object-cover"
-            src="/sport-Animation.gif"
-            alt="sportify - nexus"
-          />
-          <h1 className="font-semibold md:text-3xl text-2xl text-primary-col1">
-            Sportify Nexus
-          </h1>
-        </div>
-      </Link>
-
+    <>
       {/* Hamburger Button and close button */}
       <div>
         <button
@@ -88,7 +72,7 @@ const Navbar = () => {
         >
           <li>
             <NavLink
-              to="/"
+              to="/feed"
               className="active-nav"
               aria-current="page"
               onClick={() => setIsOpen(false)}
@@ -96,32 +80,54 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          {location.pathname !== "/" && (
-            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0">
-              <li>
-                <NavLink
-                  to="/search"
-                  className="active-nav"
-                  aria-current="page"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Find Team mate
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/feed"
-                  className="active-nav"
-                  aria-current="page"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Explore
-                </NavLink>
-              </li>
-            </div>
-          )}
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0">
+            <li>
+              <NavLink
+                to="/search"
+                className="active-nav"
+                aria-current="page"
+                onClick={() => setIsOpen(false)}
+              >
+                Find Team mate
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/"
+                className="active-nav"
+                aria-current="page"
+                onClick={() => setIsOpen(false)}
+              >
+                Log out
+              </NavLink>
+            </li>
+          </div>
         </ul>
       </div>
+    </>
+  );
+};
+
+const Navbar = () => {
+  const location = useLocation();
+
+  return (
+    <nav className="flex justify-between items-center bg-white lg:px-12 px-3 py-2 w-full z-10">
+      <Link to="/">
+        <div className="flex items-center">
+          <img
+            className="md:w-24 h-16 object-cover"
+            src="/sport-Animation.gif"
+            alt="sportify - nexus"
+          />
+          <h1 className="font-semibold md:text-3xl text-2xl text-primary-col1">
+            Sportify Nexus
+          </h1>
+        </div>
+      </Link>
+
+      {location.pathname === "/feed" && <NavItems />}
+      {location.pathname === "/search" && <NavItems />}
     </nav>
   );
 };
