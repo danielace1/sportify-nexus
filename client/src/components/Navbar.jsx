@@ -9,15 +9,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center bg-white md:px-12 sm:px-8 px-6 py-2 border-b shadow-md w-full z-10">
+    <nav className="flex justify-between items-center bg-white lg:px-12 px-3 py-2 w-full z-10 ">
       <Link to="/">
         <div className="flex items-center">
           <img
-            className="w-24 h-16 object-cover"
+            className="md:w-24 h-16 object-cover"
             src="/sport-Animation.gif"
             alt="sportify - nexus"
           />
-          <h1 className="font-semibold md:text-3xl text-2xl">Sportify Nexus</h1>
+          <h1 className="font-semibold md:text-3xl text-2xl text-primary-col1">
+            Sportify Nexus
+          </h1>
         </div>
       </Link>
 
@@ -77,10 +79,10 @@ const Navbar = () => {
           isOpen
             ? "block absolute right-0 mt-2 top-12 sm:top-0 z-10 "
             : "hidden"
-        } md:block bg-white divide-y sm:divide-y-0 divide-gray-100 rounded-lg sm:shadow-none shadow w-48 px-5 py-3 sm:w-auto `}
+        } md:block bg-white divide-y sm:divide-y-0 divide-gray-100 rounded-lg sm:shadow-none shadow w-56 px-5 md:px-0 py-3 sm:w-auto `}
       >
         <ul
-          className="grid sm:flex items-centers space-y-1 sm:space-y-0 md:text-lg text-sm sm:space-x-6 "
+          className="grid sm:flex items-centers space-y-2 sm:space-y-0 md:text-lg text-sm sm:space-x-6 "
           aria-labelledby="dropdownDefaultButton"
         >
           <li>
