@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
+import { Link, useNavigate } from "react-router-dom";
+
 import FormInput from "../components/forms/FormInput";
 
 const schema = z.object({
@@ -19,8 +21,26 @@ const Home = () => {
     reset,
   } = useForm({ resolver: zodResolver(schema) });
 
-  const sendtoServer = (e) => {
-    console.log(e);
+  const navigate = useNavigate();
+  const sendtoServer = async (data) => {
+    const login = await fetch(
+      "https://sportify-nexus.vercel.app/api/auth/login",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const player = await login.json();
+
+    if (player.status === "success") {
+      navigate("/feed");
+    }
+
     reset();
   };
 
@@ -66,7 +86,7 @@ const Home = () => {
       {/* Sign up Form */}
       <div className="mt-24 lg:mt-36">
         <h1 className="text-4xl text-primary-col1 text-center font-semibold">
-          Sign up Here !
+          Login Here !
         </h1>
         <form
           className="bg-green-50 border shadow-lg rounded-md px-10 py-14 mt-10 max-w-xl mx-auto space-y-10"
@@ -88,10 +108,20 @@ const Home = () => {
             register={register("password")}
             error={errors.password}
           />
-          <div className="flex justify-center">
+          <div className="">
             <button className="bg-green-500 hover:bg-green-600 hover:cursor-pointer w-full py-2.5 rounded text-white font-semibold">
-              Sign up
+              Login
             </button>
+            <div className="mt-5">
+              <p className="text-center text-gray-500 text-sm">
+                Don&apos;t have an account?{" "}
+                <Link to={"/register"}>
+                  <span className="text-primary-col1 underline font-semibold hover:cursor-pointer">
+                    Sign Up
+                  </span>
+                </Link>
+              </p>
+            </div>
           </div>
         </form>
       </div>

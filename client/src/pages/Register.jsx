@@ -1,6 +1,8 @@
-import { useForm } from "react-hook-form";
+import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+
+import { useNavigate } from "react-router-dom";
 
 import FormInput from "../components/forms/FormInput";
 import FormAgeSelectTag from "../components/forms/FormSelectTag";
@@ -10,7 +12,15 @@ const schema = z.object({
   fullName: z
     .string()
     .min(1, { message: "Name must be atleast 3 characters long" }),
+  email: z.string().email({ message: "Email is required" }),
 
+  password: z
+    .string()
+    .min(8, { message: "Password must contain at least 8 characters" })
+    .regex(/[0-9]/g, { message: "Password must contain at least one number" })
+    .regex(/[!,@,#,$,%,^,&,*]/g, {
+      message: "Password must contain at least one special character",
+    }),
   mobile: z
     .string()
     .min(10, { message: "Mobile Number must be atleast 10 digits" })
@@ -67,8 +77,28 @@ const Register = () => {
     reset,
   } = useForm({ resolver: zodResolver(schema) });
 
-  const sendInfoToServer = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+  const sendInfoToServer = async (data) => {
+    const sendData = await fetch(
+      "https://sportify-nexus.vercel.app/api/auth/signup",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const player = await sendData.json();
+
+    console.log(player);
+
+    if (player.status === "success") {
+      navigate("/");
+    }
+
     alert(
       `Hey, ${data.fullName} your details has been submitted successfully!`
     );
@@ -86,7 +116,7 @@ const Register = () => {
         className="bg-green-50 border rounded-md px-5 lg:px-10 py-14 mt-7 mx-auto space-y-5 sm:space-y-10"
         onSubmit={handleSubmit(sendInfoToServer)}
       >
-        {/* Fullname and number */}
+        {/* Fullname and email */}
         <div className="sm:flex sm:space-x-10 space-y-5 sm:space-y-0">
           <div className="w-full">
             <FormInput
@@ -99,8 +129,31 @@ const Register = () => {
           </div>
           <div className="w-full">
             <FormInput
-              label="Mobile"
-              type="number"
+              label="Email"
+              name="email"
+              placeholder="you@awesome.com"
+              register={register("email")}
+              error={errors.email}
+            />
+          </div>
+        </div>
+
+        {/* Password and mobile */}
+        <div className="sm:flex sm:space-x-10 space-y-5 sm:space-y-0">
+          <div className="w-full">
+            <FormInput
+              label="Password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              register={register("password")}
+              error={errors.password}
+            />
+          </div>
+
+          <div className="w-full">
+            <FormInput
+              label="Mobile Number"
               name="mobile"
               placeholder="Your Mobile Number"
               register={register("mobile")}
@@ -175,7 +228,7 @@ const Register = () => {
             <button
               type="button"
               onClick={getLocation}
-              className="mt-4 sm:mt-7 w-40 md:w-52 lg:w-56 text-sm text-orange-500 bg-amber-100 py-3 rounded  hover:cursor-pointer hover:bg-amber-200"
+              className="mt-4 sm:mt-7 w-40 md:w-52 lg:w-56 text-sm text-white bg-zinc-700 bg-opacity-80 py-3 rounded  hover:cursor-pointer hover:bg-zinc-800"
             >
               Get my Location
             </button>
