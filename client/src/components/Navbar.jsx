@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className="flex justify-between items-center bg-white lg:px-12 px-3 py-2 w-full z-10 ">
+    <nav className="flex justify-between items-center bg-white lg:px-12 px-3 py-2 w-full z-10">
       <Link to="/">
         <div className="flex items-center">
           <img
@@ -95,26 +96,30 @@ const Navbar = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/search"
-              className="active-nav"
-              aria-current="page"
-              onClick={() => setIsOpen(false)}
-            >
-              Find Team mate
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/feed"
-              className="active-nav"
-              aria-current="page"
-              onClick={() => setIsOpen(false)}
-            >
-              Explore
-            </NavLink>
-          </li>
+          {location.pathname !== "/" && (
+            <div className="flex">
+              <li>
+                <NavLink
+                  to="/search"
+                  className="active-nav"
+                  aria-current="page"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Find Team mate
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/feed"
+                  className="active-nav"
+                  aria-current="page"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Explore
+                </NavLink>
+              </li>
+            </div>
+          )}
         </ul>
       </div>
     </nav>

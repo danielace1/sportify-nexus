@@ -1,4 +1,29 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+import FormInput from "../components/forms/FormInput";
+
+const schema = z.object({
+  email: z.string().email({ message: "Email is required" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" }),
+});
+
 const Home = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({ resolver: zodResolver(schema) });
+
+  const sendtoServer = (e) => {
+    console.log(e);
+    reset();
+  };
+
   return (
     <section className="bg-green-600 bg-opacity-5 min-h-screen px-8 sm:px-16 py-10  rounded-3xl mx-3 sm:mx-5 pt-20 md:pt-24 lg:pt-40">
       {/* Content */}
@@ -39,36 +64,33 @@ const Home = () => {
       </div>
 
       {/* Sign up Form */}
-      <div className="mt-36">
+      <div className="mt-24 lg:mt-36">
         <h1 className="text-4xl text-primary-col1 text-center font-semibold">
           Sign up Here !
         </h1>
-        <form className="bg-green-50 border rounded px-10 py-14 mt-10 max-w-xl mx-auto space-y-10">
-          <div>
-            <label htmlFor="email" className="block mb-2">
-              Email :{" "}
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="you@awesome.com"
-              className="bg-green-100 outline-none px-4 py-2 w-full rounded"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="block mb-2">
-              Password :{" "}
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              className="bg-green-100 outline-none px-4 py-2 w-full rounded"
-            />
-          </div>
+        <form
+          className="bg-green-50 border shadow-lg rounded-md px-10 py-14 mt-10 max-w-xl mx-auto space-y-10"
+          onSubmit={handleSubmit(sendtoServer)}
+        >
+          <FormInput
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="you@awesome.com"
+            register={register("email")}
+            error={errors.email}
+          />
+          <FormInput
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="you@awesome.com"
+            register={register("password")}
+            error={errors.password}
+          />
           <div className="flex justify-center">
             <button className="bg-green-500 hover:bg-green-600 hover:cursor-pointer w-full py-2.5 rounded text-white font-semibold">
-              Submit
+              Sign up
             </button>
           </div>
         </form>
