@@ -8,7 +8,16 @@ const playerDataSchema = mongoose.Schema(
     },
     email: {
       type: String,
+      unique: true,
       requried: [true, "player email is requried"],
+    },
+    password: {
+      type: String,
+      requried: [true, "password email is requried"],
+    },
+    role: {
+      type: String,
+      default: "user",
     },
     mobile: {
       type: String,
