@@ -31,7 +31,7 @@ FormInput.propTypes = {
   name: Proptypes.string.isRequired,
   type: Proptypes.string,
   placeholder: Proptypes.string,
-  error: Proptypes.object.isRequired,
+  error: Proptypes.object,
   register: Proptypes.object.isRequired,
 };
 

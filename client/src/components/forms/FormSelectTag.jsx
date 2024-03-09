@@ -27,9 +27,8 @@ const FormAgeSelectTag = ({ name, error, register }) => {
 };
 
 FormAgeSelectTag.propTypes = {
-  label: Proptypes.string.isRequired,
   name: Proptypes.string.isRequired,
-  error: Proptypes.object.isRequired,
+  error: Proptypes.object,
   register: Proptypes.object.isRequired,
 };
 

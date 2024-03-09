@@ -97,7 +97,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           {location.pathname !== "/" && (
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0">
               <li>
                 <NavLink
                   to="/search"
