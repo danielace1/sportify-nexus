@@ -1,4 +1,4 @@
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -9,7 +9,7 @@ import FormAgeSelectTag from "../components/forms/FormSelectTag";
 import { useState } from "react";
 
 const schema = z.object({
-  fullName: z
+  name: z
     .string()
     .min(1, { message: "Name must be atleast 3 characters long" }),
   email: z.string().email({ message: "Email is required" }),
@@ -31,7 +31,7 @@ const schema = z.object({
 
   interestedSports: z
     .string()
-    .min(1, { message: "Interested Sports must atleast 4 characters" }),
+    .min(1, "At least one sport activity is required"),
   location: z.string().min(2, { message: "Location is required" }),
 });
 
@@ -61,8 +61,6 @@ const Register = () => {
 
         // Set the value in the form data
         setValue("location", locationValue);
-
-        console.log(data);
       });
     } catch (error) {
       console.log(error);
@@ -93,15 +91,15 @@ const Register = () => {
 
     const player = await sendData.json();
 
+    console.log(data);
+
     console.log(player);
 
     if (player.status === "success") {
       navigate("/");
     }
 
-    alert(
-      `Hey, ${data.fullName} your details has been submitted successfully!`
-    );
+    alert(`Hey, ${data.name} your details has been submitted successfully!`);
     reset();
   };
 
@@ -116,15 +114,15 @@ const Register = () => {
         className="bg-green-50 border rounded-md px-5 lg:px-10 py-14 mt-7 mx-auto space-y-5 sm:space-y-10"
         onSubmit={handleSubmit(sendInfoToServer)}
       >
-        {/* Fullname and email */}
+        {/* name and email */}
         <div className="sm:flex sm:space-x-10 space-y-5 sm:space-y-0">
           <div className="w-full">
             <FormInput
               label="Full Name"
-              name="fullName"
+              name="name"
               placeholder="Your Full Name"
-              register={register("fullName")}
-              error={errors.fullName}
+              register={register("name")}
+              error={errors.name}
             />
           </div>
           <div className="w-full">
