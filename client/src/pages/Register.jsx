@@ -29,9 +29,7 @@ const schema = z.object({
   age: z.string().min(1, { message: "Select Age" }),
   gender: z.string().min(1, { message: "Select Gender" }),
 
-  interestedSports: z
-    .string()
-    .min(1, "At least one sport activity is required"),
+  sports: z.string().min(1, "At least one sport activity is required"),
   location: z.string().min(2, { message: "Location is required" }),
 });
 
@@ -197,10 +195,10 @@ const Register = () => {
           <div className="w-full">
             <FormInput
               label="Interested Sports"
-              name="interestedSports"
+              name="sports"
               placeholder="Football, Cricket, Tennis"
-              register={register("interestedSports")}
-              error={errors.interestedSports}
+              register={register("sports")}
+              error={errors.sports}
             />
           </div>
           <div className="w-full sm:space-x-4 sm:flex sm:items-center">
