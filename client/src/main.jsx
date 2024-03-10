@@ -35,7 +35,7 @@ const route = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/feed",
+        path: "/feed/:_id",
         element: <Feed />,
       },
       {
