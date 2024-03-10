@@ -126,7 +126,8 @@ const Navbar = () => {
         </div>
       </Link>
 
-      {location.pathname === "/feed" && <NavItems />}
+      {console.log(location)}
+      {location.pathname.match("/feed/") && <NavItems />}
       {location.pathname === "/search" && <NavItems />}
     </nav>
   );
