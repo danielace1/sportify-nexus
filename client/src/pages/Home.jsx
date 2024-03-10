@@ -46,7 +46,7 @@ const Home = () => {
   };
 
   return (
-    <section className="bg-green-600 bg-opacity-5 p-4 md:p-8 m-2 md:m-6 rounded-3xl ">
+    <section className="bg-green-600 bg-opacity-5 p-4 md:p-8 mx-2 md:mx-6 rounded-3xl ">
       <div className="container">
         {/* Content */}
         <div className="flex flex-col-reverse md:flex-row justify-around items-center h-[65dvh] lg:h-[75dvh] w-full">

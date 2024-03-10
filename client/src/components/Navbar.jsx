@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 
 const NavItems = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -72,7 +73,7 @@ const NavItems = () => {
         >
           <li>
             <NavLink
-              to="/feed"
+              to={`/feed`}
               className="active-nav"
               aria-current="page"
               onClick={() => setIsOpen(false)}
@@ -126,7 +127,6 @@ const Navbar = () => {
         </div>
       </Link>
 
-      {console.log(location)}
       {location.pathname.match("/feed/") && <NavItems />}
       {location.pathname === "/search" && <NavItems />}
     </nav>
