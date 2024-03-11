@@ -11,7 +11,7 @@ const Footer = () => {
           <img
             src="https://github.com/danielace1.png"
             alt="instagram"
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 object-cover rounded-full"
           />
         </a>
         <a
@@ -22,7 +22,7 @@ const Footer = () => {
           <img
             src="https://github.com/sharif-22.png"
             alt="instagram"
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 object-cover rounded-full"
           />
         </a>
       </div>
