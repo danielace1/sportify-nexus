@@ -36,6 +36,8 @@ const schema = z.object({
 const Register = () => {
   const [location, setLocation] = useState([]);
 
+  const LOCATION_API = import.meta.env.VITE_LOCATION_API_KEY;
+
   const getLocation = async () => {
     try {
       navigator.geolocation.getCurrentPosition(async (position) => {
@@ -45,10 +47,12 @@ const Register = () => {
         const searchQuery = `at=${latitude},${longitude}`;
 
         const location_api = await fetch(
-          `https://revgeocode.search.hereapi.com/v1/revgeocode?${searchQuery}&lang=en-US&apiKey=POeJtzbmR7m2S4m1ayfzoOGU0Q-LzzjQ6cqlUbbRoaM`
+          `https://revgeocode.search.hereapi.com/v1/revgeocode?${searchQuery}&lang=en-US&apiKey=${LOCATION_API}`
         );
 
         const data = await location_api.json();
+
+        console.log(data);
 
         const state = data.items[0].address.state;
         const county = data.items[0].address.county;
