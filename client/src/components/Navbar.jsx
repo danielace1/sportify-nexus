@@ -7,6 +7,7 @@ const NavItems = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <>
       {/* Hamburger Button and close button */}

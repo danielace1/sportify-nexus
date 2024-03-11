@@ -15,7 +15,9 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="bg-white">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

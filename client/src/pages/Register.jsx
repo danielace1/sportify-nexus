@@ -29,8 +29,10 @@ const schema = z.object({
   age: z.string().min(1, { message: "Select Age" }),
   gender: z.string().min(1, { message: "Select Gender" }),
 
-  sports: z.string().min(1, "At least one sport activity is required"),
-  location: z.string().min(2, { message: "Location is required" }),
+  sports: z
+    .string()
+    .min(1, { message: "At least one sport activity is required" }),
+  location: z.string().min(1, { message: "Location is required" }),
 });
 
 const Register = () => {
@@ -113,7 +115,7 @@ const Register = () => {
 
       {/* Register Form */}
       <form
-        className="bg-green-50 border rounded-md px-5 lg:px-10 py-14 mt-7 mx-auto space-y-5 sm:space-y-10"
+        className="bg-green-50 border rounded-md px-5 lg:px-10 py-14 mt-7 mx-auto space-y-5 sm:space-y-10 text-black"
         onSubmit={handleSubmit(sendInfoToServer)}
       >
         {/* name and email */}

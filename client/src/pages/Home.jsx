@@ -91,7 +91,7 @@ const Home = () => {
             Login Here !
           </h1>
           <form
-            className="bg-green-50 border shadow-lg rounded-md px-10 py-14 mt-10 max-w-xl mx-auto space-y-10"
+            className="bg-green-50 border shadow-lg rounded-md px-10 py-14 mt-10 max-w-xl mx-auto space-y-10 text-black"
             onSubmit={handleSubmit(sendtoServer)}
           >
             <FormInput
