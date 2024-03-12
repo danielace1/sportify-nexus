@@ -41,7 +41,7 @@ const Feed = () => {
   useEffect(() => {
     async function getSportsNews() {
       const sportsNews = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=${SPORTS_NEWS_API}`
+        `https://corsproxy.org/?https%3A%2F%2Fnewsapi.org%2Fv2%2Ftop-headlines%3Fcountry%3Din%26category%3Dsports%26apiKey%3D${SPORTS_NEWS_API}`
       );
 
       const sportsData = await sportsNews.json();
