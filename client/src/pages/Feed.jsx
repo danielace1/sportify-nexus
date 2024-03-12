@@ -41,13 +41,13 @@ const Feed = () => {
   useEffect(() => {
     async function getSportsNews() {
       const sportsNews = await fetch(
-        `https://corsproxy.org/?https%3A%2F%2Fnewsapi.org%2Fv2%2Ftop-headlines%3Fcountry%3Din%26category%3Dsports%26apiKey%3D${SPORTS_NEWS_API}`
+        `https://newsdata.io/api/1/news?country=in&category=sports&apikey=${SPORTS_NEWS_API}`
       );
 
       const sportsData = await sportsNews.json();
 
-      console.log(sportsData.articles);
-      setSportsCard(sportsData.articles);
+      console.log(sportsData.results);
+      setSportsCard(sportsData.results);
     }
 
     getSportsNews();
@@ -99,12 +99,12 @@ const Feed = () => {
             {sportsCard.map((sportcard) => (
               <SportsNewsCard
                 key={sportcard.title}
-                url={sportcard.url}
-                urlImg={sportcard.urlToImage}
+                url={sportcard.link}
+                urlImg={sportcard.image_url}
                 title={sportcard.title}
                 desc={sportcard.description}
-                author={sportcard.author}
-                time={sportcard.publishedAt}
+                author={sportcard.creator}
+                time={sportcard.pubDate}
               />
             ))}
           </Slider>
